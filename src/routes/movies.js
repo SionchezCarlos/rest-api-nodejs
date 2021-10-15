@@ -9,9 +9,19 @@ router.get('/', (req, res)=>{
 });
 
 router.post('/', (req, res)=>{
-    console.log(req .body);
+    // console.log(req .body);
+    const {title, director, year, rating} = req.body;
+
+    if(title && director && year && rating){
+        const id = movies.length + 1;
+        const newMovie = {...req.body, id}
+        movies.push(newMovie);
+        res.json(movies);
+    }else{
+        res.status(500).json({error: 'There was an error.'});
+    }
 
     res.send('Data recibida');
 });
 
-module.exports = router;
+module.exports = router; 
